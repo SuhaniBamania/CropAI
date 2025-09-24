@@ -6,18 +6,22 @@ from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
 from PIL import UnidentifiedImageError
 
+
 # Import the new pest risk engine
 from pest_risk import get_pest_risk_assessment, PestRiskEngine
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['WEATHER_API_KEY'] = None  # Add your OpenWeatherMap API key here if you have one
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
+
 # Load the trained model once at startup
 model = tf.keras.models.load_model('leaf_model_with_unknown.h5')
 classes = ['Blight', 'Healthy', 'Mosaic', 'Rust', 'Unknown']  # Added "Unknown"
 CONFIDENCE_THRESHOLD = 0.4  # Confidence below this => Unknown
+
 
 # Your existing RECOMMENDATIONS dictionary stays the same
 RECOMMENDATIONS = {
@@ -161,8 +165,71 @@ def get_comprehensive_recommendation(prediction, confidence_score=None):
     
     return base_rec
 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ['jpg', 'jpeg', 'png']
+
+
+# NAVIGATION ROUTES - NEW ROUTES FOR MISSING TEMPLATES
+
+@app.route('/')
+def landing():
+    """Root route - Landing page (first page users see)"""
+    return render_template('landing.html')
+
+@app.route('/soil-condition-card')
+def soil_analysis():
+    """Soil condition analysis page"""
+    return render_template('soil-condition-card.html')
+
+@app.route('/crop-report')
+def crop_report():
+    return render_template('crop-report.html')
+
+@app.route('/recommendations')
+def recommendations():
+    return render_template('recommendations.html')
+
+@app.route('/recommendation/<crop>')
+def recommendation_detail(crop):
+    # Add logic to handle individual crop recommendations
+    # For now, you can return a simple template or redirect
+    valid_crops = ['wheat', 'rice', 'maize']
+    if crop.lower() in valid_crops:
+        # You would typically pass crop-specific data here
+        return render_template('recommendations.html', crop=crop)
+    else:
+        return redirect('/recommendations')
+
+
+@app.route('/home')
+def home():
+    """Home page - redirects to landing page"""
+    return render_template('landing.html')
+
+
+@app.route('/features')
+def features():
+    """Features page - shows available features with cards"""
+    return render_template('features.html')
+
+
+@app.route('/about')
+def about():
+    """About page - information about the application"""
+    return render_template('about.html')
+
+
+@app.route('/chatbot')
+def chatbot():
+    """Chatbot support page"""
+    return render_template('chatbot.html')
+
+
+@app.route('/helpline')
+def helpline():
+    """Helpline & Government Resources page"""
+    return render_template('helpline.html')
 
 
 @app.route('/uploads/<filename>')
@@ -170,7 +237,6 @@ def uploaded_file(filename):
     response = make_response(send_from_directory(app.config['UPLOAD_FOLDER'], filename))
     response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     return response
-
 
 # NEW ROUTE: Pest Risk API endpoint
 @app.route('/api/pest-risk')
@@ -201,6 +267,7 @@ def get_pest_risk():
         }), 500
 
 
+
 # NEW ROUTE: Dashboard page
 @app.route('/dashboard')
 def dashboard():
@@ -214,8 +281,9 @@ def dashboard():
         return render_template('dashboard.html', pest_risk=None, error=str(e))
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+
+@app.route('/index', methods=['GET', 'POST'])
+def plant_detection():
     if request.method == 'POST':
         try:
             if 'file' not in request.files:
@@ -225,29 +293,36 @@ def index():
             if f.filename == '':
                 return "No file selected. Please upload an image.", 400
 
+
             ext = ''
             if '.' in f.filename:
                 ext = '.' + f.filename.rsplit('.', 1)[1].lower()
             else:
                 ext = '.jpg'  # default extension if none provided
 
+
             if not allowed_file(f.filename):
                 return "Unsupported file format. Please upload JPG or PNG image.", 400
 
+
             filename = f"upload_{uuid.uuid4().hex}{ext}"
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
 
             f.save(filepath)
             if os.path.getsize(filepath) < 1 * 1024:  # allow small but valid files
                 os.remove(filepath)
                 return "File too small or corrupted. Please upload a valid image.", 400
 
+
             img = image.load_img(filepath, target_size=(128, 128))
             img_array = image.img_to_array(img) / 255.0
             img_array = tf.expand_dims(img_array, axis=0)
 
+
             pred = model.predict(img_array)
             max_prob = tf.reduce_max(pred[0]).numpy()
+
 
             if max_prob < CONFIDENCE_THRESHOLD:
                 pred_class = "Unknown"
@@ -256,7 +331,9 @@ def index():
                 pred_class = classes[tf.argmax(pred[0]).numpy()]
                 confidence = max_prob
 
+
             recommendations = get_comprehensive_recommendation(pred_class, confidence)
+
 
             try:
                 if pred_class.lower() == "unknown":
@@ -265,6 +342,7 @@ def index():
                     pest_risk = get_pest_risk_assessment(api_key=app.config.get('WEATHER_API_KEY'))
             except Exception:
                 pest_risk = None
+
 
             return render_template('index.html',
                                    prediction=pred_class,
@@ -290,12 +368,14 @@ def index():
         except Exception:
             pest_risk = None
 
+
         return render_template('index.html',
                                prediction=None,
                                img_path=None,
                                confidence=None,
                                recommendations=None,
                                pest_risk=pest_risk)
+
 
 
 if __name__ == '__main__':
