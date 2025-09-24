@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>KrishiSarthi - Features</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f6faf2;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2f4f2f;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .content-wrapper {
+      flex: 1 0 auto;
+    }
+    header {
+      background: #f6faf2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px 16px 40px;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo::before {
+      content: '';
+      display: inline-block;
+      background: #409b5c;
+      border-radius: 5px;
+      width: 18px; height: 18px; margin-right: 6px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    nav a {
+      color: #26382d;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #409b5c;
+    }
+    main {
+      padding-top: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+      text-align: center;
+      letter-spacing: 0.01em;
+      margin-top: 25px;
+    }
+    .feature-subtitle {
+      color: #537356;
+      font-size: 1.09rem;
+      text-align: center;
+      margin-bottom: 40px;
+      margin-top: 0;
+    }
+    .features-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 7px 24px rgba(71, 129, 84, 0.07);
+      border: none;
+      padding: 29px 31px 23px 31px;
+      flex: 1 1 305px;
+      min-width: 285px;
+      max-width: 345px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.14s, box-shadow 0.14s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 16px 36px rgba(71,129,84,0.13);
+    }
+    .card h3 {
+      font-size: 1.19rem;
+      font-weight: 700;
+      margin-bottom: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card p {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #444d45;
+      margin: 0 0 20px 0;
+    }
+    .learn-link {
+      margin-top: auto;
+      color: #13a046;
+      font-weight: 700;
+      font-size: 1.03rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .card svg, .card i {
+      font-size: 1.5rem;
+      margin-right: 4px;
+      color: #1aac5d;
+      vertical-align: middle;
+    }
+    /*CTA section*/
+    .cta-container {
+      background: #e6f5ea;
+      border-radius: 13px;
+      max-width: 950px;
+      margin: 0 auto 60px auto;
+      text-align: center;
+      padding: 40px 24px 35px 24px;
+    }
+    .call-to-action {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 9px;
+      margin-top: 0;
+      color: #214c2e;
+      letter-spacing: 0.005em;
+    }
+    .cta-btn {
+      margin-top: 24px;
+      background: #18b856;
+      color: #fff;
+      padding: 14px 39px;
+      font-size: 1.22rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      box-shadow: 0 2px 22px rgba(38,69,46,0.11);
+      transition: background 0.14s;
+    }
+    .cta-btn:hover {
+      background: #11773d;
+    }
+    footer {
+      background: #f9fcf6;
+      color: #7ea287;
+      border-top: 1px solid #e9f3ea;
+      font-size: 0.97rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      margin-top: auto;
+    }
+    .footer-links a {
+      color: #7ea287;
+      margin-right: 28px;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    .footer-right {
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 980px) {
+      .features-row { flex-direction: column; align-items: center; }
+      .card { max-width: 95%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">KrishiSarthi</div>
+    <nav>
+        <div class="navbar-nav me-auto">
+        <a class="nav-link" href="/home">Home</a>
+        <a class="nav-link active" href="/about">About</a>
+        <a class="nav-link" href="/">Help</a>
+        <a class="nav-link" href="/chatbot">Chatbot Support</a>
+        <a class="nav-link" href="/helpline">Helpline & Govt. Resources</a>
+      </div>
+      <!-- Language button -->
+      <button class="btn btn-sm btn-success ms-3 lang-btn">🌐 Language</button>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+  <div class="content-wrapper">
+    <main>
+      <h2 class="feature-title">Key Features</h2>
+      <p class="feature-subtitle">Discover how KrishiSarthi can revolutionize your farming practices.</p>
+      <div class="features-row">
+        <div class="card" onclick="window.location.href='/index'">
+          <h3>
+            <span>🌱</span> Check Plant Health
+          </h3>
+          <p>
+            Monitor plant health using AI-powered image analysis. Detect diseases, nutrient deficiencies, and stress factors early to take timely action.
+          </p>
+          <span class="learn-link">Learn More →</span>
+        </div>
+        <div class="card" onclick="window.location.href='/soil-condition-card'">
+          <h3>
+            <span>🧪</span> Soil Condition Analysis
+          </h3>
+          <p>Assess soil conditions with detailed analysis of nutrient levels, pH balance, and moisture content. Optimize fertilization and irrigation.</p>
+          <span class="learn-link">Learn More →</span>
+        </div>
+        <div class="card" onclick="window.location.href='/recommendations'">
+          <h3>
+            <span>💡</span> Smart Recommendations
+          </h3>
+          <p>
+            Receive personalized recommendations for crop selection, planting schedules, and resource management to improve efficiency.
+          </p>
+          <span class="learn-link">Learn More →</span>
+        </div>
+      </div>
+      <div class="cta-container">
+        <h2 class="call-to-action">Ready to Transform Your Farming Practices?</h2>
+        <p>Join the future of agriculture today.</p>
+        <button class="cta-btn" onclick="window.location.href='/crop-report'">Get Started Today</button>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-right">© 2024 KrishiSarthi. All rights reserved.</div>
+  </footer>
+</body>
+</html>

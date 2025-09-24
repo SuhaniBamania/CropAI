@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Helpline & Government Resources - KrishiSarthi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6faf2;
+      color: #2f4f2f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #f6faf2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px 16px 40px;
+      box-shadow: none;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo::before {
+      content: '';
+      display: inline-block;
+      background: #409b5c;
+      border-radius: 5px;
+      width: 18px; height: 18px; margin-right: 6px;
+    }
+    nav a {
+      color: #26382d;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      margin-right: 8px;
+    }
+    nav a:hover {
+      color: #409b5c;
+    }
+    nav a.active {
+      font-weight: 700;
+      color: #11773d;
+      border-bottom: 3px solid #11773d;
+      padding-bottom: 6px;
+    }
+    .login-btn {
+      margin-left: 32px;
+      background: #109847;
+      border: none;
+      border-radius: 9px;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 22px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: #086d31;
+    }
+    main.container {
+      max-width: 900px;
+      margin: 3rem auto 4rem auto;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+    h1.page-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      color: #214c1e;
+    }
+    p.intro-text {
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 3rem;
+      color: #4f7446;
+    }
+    section.helpline-section {
+      margin-bottom: 2.5rem;
+    }
+    section.helpline-section h2 {
+      color: #2f4f2f;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid #9ece69;
+      padding-bottom: 0.3rem;
+    }
+    ul.helpline-list {
+      list-style: none;
+      padding-left: 1rem;
+      font-size: 1.05rem;
+      color: #3b5535;
+    }
+    ul.helpline-list li {
+      margin-bottom: 0.9rem;
+    }
+    ul.helpline-list li strong {
+      font-weight: 700;
+    }
+    ul.helpline-list li a {
+      color: #11773d;
+      text-decoration: none;
+    }
+    ul.helpline-list li a:hover {
+      text-decoration: underline;
+    }
+    .official-card {
+      background: #e8f4ed;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 9px 15px rgb(132 154 39 / 0.22);
+      font-size: 1.03rem;
+      color: #3c6238;
+    }
+    .official-card h3 {
+      margin-top: 0;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      color: #204326;
+    }
+    .official-card p {
+      margin: 0.18rem 0;
+    }
+    footer {
+      background: #f9fcf6;
+      color: #7ea287;
+      border-top: 1px solid #e9f3ea;
+      font-size: 0.97rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      margin-top: auto;
+    }
+    .footer-links a {
+      color: #7ea287;
+      margin-right: 28px;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    .footer-right {
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 768px) {
+      main.container {
+        margin: 2rem 10px;
+        padding: 0 10px;
+      }
+      header, footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav a {
+        margin-right: 12px;
+      }
+      .footer-links {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">KrishiSarthi</div>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/about">About</a>
+      <a href="/" >Help</a>
+      <a href="/chatbot">Chatbot Support</a>
+      <a href="/helpline" class="active">Helpline & Govt. Resources</a>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Helpline & Government Resources</h1>
+    <p class="intro-text">Find important contacts, government support, and emergency helplines below.</p>
+
+    <section class="helpline-section">
+      <h2>Emergency Helplines</h2>
+      <ul class="helpline-list">
+        <li><strong>National Emergency Number:</strong> 112</li>
+        <li><strong>Agricultural Helpline:</strong> 1800-180-1551</li>
+        <li><strong>Disaster Management:</strong> 108</li>
+        <li><strong>Farmer Loan Assistance:</strong> 1800-180-1552</li>
+      </ul>
+    </section>
+
+    <section class="helpline-section">
+      <h2>Government Resources</h2>
+      <ul class="helpline-list">
+        <li><strong>Ministry of Agriculture:</strong> <a href="https://agricoop.nic.in" target="_blank">agricoop.nic.in</a></li>
+        <li><strong>Indian Council of Agricultural Research:</strong> <a href="https://icar.org.in" target="_blank">icar.org.in</a></li>
+        <li><strong>PM-Kisan Portal:</strong> <a href="https://pmkisan.gov.in" target="_blank">pmkisan.gov.in</a></li>
+      </ul>
+    </section>
+
+    <section class="helpline-section">
+      <h2>Local Officials (Dummy Data)</h2>
+      <div class="official-card">
+        <h3>Mr. Rajesh Sharma</h3>
+        <p><strong>Designation:</strong> District Agriculture Officer</p>
+        <p><strong>Contact:</strong> +91 9876543210</p>
+        <p><strong>Email:</strong> rajesh.sharma@gov.in</p>
+        <p><strong>Office Address:</strong> Agriculture Department, Meerut, UP</p>
+      </div>
+      <div class="official-card">
+        <h3>Ms. Neha Verma</h3>
+        <p><strong>Designation:</strong> Regional Irrigation Officer</p>
+        <p><strong>Contact:</strong> +91 9876501234</p>
+        <p><strong>Email:</strong> neha.verma@gov.in</p>
+        <p><strong>Office Address:</strong> Irrigation Dept., Lucknow, UP</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-right">© 2024 KrishiSarthi. All rights reserved.</div>
+  </footer>
+</body>
+</html>

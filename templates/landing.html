@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>KrishiSarthi - AI-Powered Farming Assistant</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6faf2;
+      color: #2f4f2f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #f6faf2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px 16px 40px;
+      box-shadow: none;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo::before {
+      content: '';
+      display: inline-block;
+      background: #409b5c;
+      border-radius: 5px;
+      width: 18px; height: 18px; margin-right: 6px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    nav a {
+      color: #26382d;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      margin-right: 8px;
+    }
+    nav a:hover {
+      color: #409b5c;
+    }
+    .login-btn {
+      margin-left: 32px;
+      background: #109847;
+      border: none;
+      border-radius: 9px;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 22px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: #086d31;
+    }
+    .hero-bg {
+      background: url('https://www.shutterstock.com/image-photo/lush-rice-paddy-field-neat-260nw-2499404003.jpg') no-repeat center center/cover;
+      height: 100vh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Vertical center */
+      text-align: center;
+      position: relative;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(38,69,46,0.21); /* Soft green overlay */
+      z-index: 0;
+    }
+    .hero-title, .hero-tagline, .cta-btn {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-title {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    margin: 0 0 0.7em 0;
+    }
+    .hero-tagline {
+      color: #f0f9f1;
+      font-size: 1.3rem;
+      margin: 18px 0 30px 0;
+      font-family: inherit;
+      font-weight: 500;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .cta-btn {
+      background: #18b856;
+      color: #fff;
+      padding: 16px 38px;
+      font-size: 1.32rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 9px;
+      margin: 22px 0 70px 0;
+      cursor: pointer;
+      transition: background 0.14s;
+      box-shadow: 0 2px 22px rgba(38,69,46,0.11);
+    }
+    .cta-btn:hover {
+      background: #11773d;
+    }
+    footer {
+      background: #f9fcf6;
+      color: #7ea287;
+      border-top: 1px solid #e9f3ea;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      margin-top: auto;
+    }
+    .footer-links a {
+      color: #7ea287;
+      margin-right: 28px;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    .footer-right {
+      font-size: 0.96rem;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 700px) {
+      header, footer { flex-direction: column; align-items: flex-start; }
+      .hero-title { font-size: 2.1rem; }
+      .cta-btn { font-size: 1rem;}
+      .footer-links a {margin-right: 14px;}
+    }
+  </style>
+</head>
+<body style="display:flex; min-height:100vh; flex-direction:column;">
+<body>
+  <header>
+    <div class="logo">KrishiSarthi</div>
+    <nav>
+        <div class="navbar-nav me-auto">
+        <a class="nav-link" href="/home">Home</a>
+        <a class="nav-link active" href="/about">About</a>
+        <a class="nav-link" href="/">Help</a>
+        <a class="nav-link" href="/chatbot">Chatbot Support</a>
+        <a class="nav-link" href="/helpline">Helpline & Govt. Resources</a>
+      </div>
+      <!-- Language button -->
+      <button class="btn btn-sm btn-success ms-3 lang-btn">🌐 Language</button>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+  <section class="hero-bg">
+    <h1 class="hero-title">AI-Powered Farming<br>Assistant</h1>
+    <div class="hero-tagline">
+      Maximize your yields with intelligent insights and precision farming tools.
+    </div>
+    <button class="cta-btn" onclick="window.location.href='/features'">Get Started Today</button>
+  </section>
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-right">© 2024 KrishiSarthi. All rights reserved.</div>
+  </footer>
+</body>
+</html>

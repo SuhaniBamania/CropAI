@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /* Navbar base style */
+.navbar {
+  background-color: #f6faf2; /* Light background for navbar */
+  border-bottom: 1px solid #ccd7c6; /* subtle border */
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Nav link style */
+.navbar-nav a.nav-link {
+  color: #2f4f2f;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar-nav a.nav-link:hover,
+.navbar-nav a.nav-link.active {
+  color: #109847; /* Green highlight */
+}
+
+/* Language button style */
+.lang-btn {
+  background-color: #109847;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 1px 5px rgba(16, 152, 71, 0.6);
+  transition: background-color 0.3s ease;
+}
+
+.lang-btn:hover {
+  background-color: #086d31;
+}
+
+/* Footer container and layout */
+.footer {
+  background-color: #f9fcf6;
+  color: #537356;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+.footer-col {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+.footer-col h3 {
+  color: #2f4f2f;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.footer-col p, .footer-col ul {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li a {
+  color: #537356;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #109847;
+}
+
+.social-links a {
+  margin-right: 0.75rem;
+  font-size: 1.3rem;
+  color: #109847;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  color: #086d31;
+}
+
+.footer-bottom {
+  width: 100%;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ccd7c6;
+  color: #3b5323;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+  }
+  .footer-col {
+    min-width: auto;
+    margin-bottom: 2rem;
+  }
+  .navbar-nav {
+    flex-wrap: wrap;
+  }
+}
+</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}KrishiSarthi{% endblock %}</title>
+  <!-- Link your CSS file here or write inline styles if you prefer -->
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <!-- Your exact navbar code -->
+  <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+    <div class="container-fluid">
+      <div class="d-flex order-0 order-md-0">
+        <div class="navbar-nav me-auto">
+          <a class="nav-link" href="/home">Home</a>
+          <a class="nav-link active" href="/about">About</a>
+          <a class="nav-link" href="/">Help</a>
+          <a class="nav-link" href="/chatbot">Chatbot Support</a>
+          <a class="nav-link" href="/helpline">Helpline & Govt. Resources</a>
+        </div>
+        <button class="btn btn-sm btn-success ms-3 lang-btn">🌐 Language</button>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENT BLOCK -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- Your exact footer code -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>About SmartSphere</h3>
+        <p>
+          SmartSphere is an AI-powered platform to help farmers detect crop diseases,
+          monitor soil conditions, and get smart recommendations for better farming.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/helpline">Helpline & Govt Resources</a></li>
+          <li><a href="/chatbot">Chatbot</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Email: support@smartsphere.com</p>
+        <p>Phone: +91 98765 12345</p>
+        <p>Address: IGDTUW, Delhi, India</p>
+      </div>
+      <div class="footer-col">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#">🌐</a>
+          <a href="#">🐦</a>
+          <a href="#">📘</a>
+          <a href="#">📸</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SmartSphere | All Rights Reserved</p>
+    </div>
+  </footer>
+  <!-- Bootstrap CSS CDN (already included if you want) -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

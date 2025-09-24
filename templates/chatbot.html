@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KrishiSarthi - Chatbot Support</title>
+  <style>
+    /* Use the exact navbar styles from landing.html */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: #eff6ed;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #f6faf2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px 16px 40px;
+      box-shadow: none;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo::before {
+      content: '';
+      display: inline-block;
+      background: #409b5c;
+      border-radius: 5px;
+      width: 18px; height: 18px; margin-right: 6px;
+    }
+    nav a {
+      color: #26382d;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      margin-right: 8px;
+    }
+    nav a:hover {
+      color: #409b5c;
+    }
+    nav a.active {
+      color: #0b3f13; /* darker green for active */
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .login-btn {
+      margin-left: 32px;
+      background: #109847;
+      border: none;
+      border-radius: 9px;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 22px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: #086d31;
+    }
+    /* Chatbot container styles remain the same */
+    .chatbot-container {
+      flex-grow: 1;
+      max-width: 600px;
+      margin: 3rem auto;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .chatbot-container h1 {
+      margin: 0 0 0.5rem 0;
+      color: #214e1b;
+      font-weight: 900;
+      text-align: center;
+    }
+    .chatbot-container p.chatbot-intro {
+      margin: 0 0 2rem 0;
+      text-align: center;
+      color: #537049;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .chat-window {
+      background: #f4f9f2;
+      border-radius: 10px;
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      background: #e6f1df;
+      box-shadow: inset 0 0 5px rgba(132, 185, 109, 0.25);
+    }
+    .chat-messages div {
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 0.5rem;
+      border-radius: 20px;
+      max-width: 80%;
+      word-wrap: break-word;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+    .bot-message {
+      background: #bdeeb4;
+      color: #22491b;
+      align-self: flex-start;
+    }
+    .user-message {
+      background: #4f9851;
+      color: white;
+      align-self: flex-end;
+    }
+    .chat-input {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .chat-input input[type="text"] {
+      flex-grow: 1;
+      padding: 0.7rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #9fd18a;
+      font-size: 1rem;
+      outline: none;
+    }
+    .chat-input button {
+      background-color: #109848;
+      border: none;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(16, 152, 72, 0.6);
+      transition: background-color 0.3s ease;
+    }
+    .chat-input button:hover {
+      background-color: #0a5d30;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">KrishiSarthi</div>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/about">About</a>
+      <a href="/" >Help</a>
+      <a href="/chatbot" class="active">Chatbot Support</a>
+      <a href="/helpline">Helpline & Govt. Resources</a>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <div class="chatbot-container">
+    <h1>Chatbot Support</h1>
+    <p class="chatbot-intro">This is a demo of how our chatbot will look like.</p>
+    <div class="chat-window">
+      <div class="chat-messages" id="chatMessages">
+        <div class="bot-message">👩‍🌾 Hello! I’m your KrishiSarthi assistant. How can I help you today?</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  function sendMessage() {
+    const input = document.getElementById("userInput");
+    const message = input.value.trim();
+    if (!message) return;
+    const chatMessages = document.getElementById("chatMessages");
+    // User message
+    const userMsg = document.createElement("div");
+    userMsg.classList.add("user-message");
+    userMsg.textContent = "🧑 " + message;
+    chatMessages.appendChild(userMsg);
+    // Bot reply (dummy)
+    const botMsg = document.createElement("div");
+    botMsg.classList.add("bot-message");
+    botMsg.textContent = "🤖 This is a demo response for: " + message;
+    chatMessages.appendChild(botMsg);
+    // Scroll down
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    input.value = "";
+  }
+  </script>
+</body>
+</html>

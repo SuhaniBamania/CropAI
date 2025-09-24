@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About KrishiSarthi - KrishiSarthi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6faf2;
+      color: #2f4f2f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #f6faf2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px 16px 40px;
+      box-shadow: none;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo::before {
+      content: '';
+      display: inline-block;
+      background: #409b5c;
+      border-radius: 5px;
+      width: 18px; height: 18px; margin-right: 6px;
+    }
+    nav a {
+      color: #26382d;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      margin-right: 8px;
+    }
+    nav a:hover {
+      color: #409b5c;
+    }
+    nav a.active {
+      font-weight: 700;
+      color: #11773d;
+      border-bottom: 3px solid #11773d;
+      padding-bottom: 6px;
+    }
+    .login-btn {
+      margin-left: 32px;
+      background: #109847;
+      border: none;
+      border-radius: 9px;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 22px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: #086d31;
+    }
+    .about-container {
+      max-width: 900px;
+      margin: 3rem auto 4rem auto;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+    .about-section {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .about-section.reverse {
+      flex-direction: row-reverse;
+    }
+    .about-img {
+      max-width: 45%;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgb(75 125 55 / 0.3);
+      object-fit: cover;
+    }
+    .about-text {
+      flex: 1;
+      color: #3b5f2a;
+    }
+    .about-text h2 {
+      font-size: 1.9rem;
+      color: #2f4f2f;
+      margin-bottom: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .about-text ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-weight: 600;
+      list-style-type: disc;
+      color: #557a3b;
+    }
+    .about-text ul li {
+      padding: 6px 0;
+    }
+    .intro {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #4f7446;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    footer {
+      background: #f9fcf6;
+      color: #7ea287;
+      border-top: 1px solid #e9f3ea;
+      font-size: 0.97rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      margin-top: auto;
+    }
+    .footer-links a {
+      color: #7ea287;
+      margin-right: 28px;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    .footer-right {
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 768px) {
+      .about-section, .about-section.reverse {
+        flex-direction: column;
+      }
+      .about-img {
+        max-width: 100%;
+      }
+      .about-container {
+        margin: 2rem 10px;
+        padding: 0 10px;
+      }
+      header, footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav a {
+        margin-right: 12px;
+      }
+      .footer-links {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">KrishiSarthi</div>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/about" class="active">About</a>
+      <a href="/">Help</a>
+      <a href="/chatbot">Chatbot Support</a>
+      <a href="/helpline">Helpline & Govt. Resources</a>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <main class="about-container">
+    <h1>About KrishiSarthi</h1>
+    <p class="intro">
+      KrishiSarthi is a smart farming assistant that empowers farmers with AI-based tools 
+      to make better decisions for healthier crops and improved yield.
+    </p>
+
+    <div class="about-section">
+      <img src="https://media.istockphoto.com/id/543212762/photo/tractor-cultivating-field-at-spring.jpg?s=612x612&w=0&k=20&c=uJDy7MECNZeHDKfUrLNeQuT7A1IqQe89lmLREhjIJYU=" alt="Farming" class="about-img" />
+      <div class="about-text">
+        <h2>🌱 Our Mission</h2>
+        <p>
+          To make agriculture smarter, sustainable, and more accessible by combining 
+          artificial intelligence with real-time insights for farmers everywhere.
+        </p>
+      </div>
+    </div>
+
+    <div class="about-section reverse">
+      <div class="about-text">
+        <h2>🚀 What We Offer</h2>
+        <ul>
+          <li>AI-powered crop disease detection</li>
+          <li>Soil condition monitoring</li>
+          <li>Pest risk analysis</li>
+          <li>Actionable smart recommendations</li>
+          <li>Helpline & government resources</li>
+          <li>Chatbot support for farmers</li>
+        </ul>
+      </div>
+      <img src="https://www.agrirs.co.uk/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMXF2UWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d74a2c1ac2f7b21112d3805d64c0dcb98fc57c59/iStock-1346294867.jpg" alt="Smart Farming" class="about-img" />
+    </div>
+
+    <div class="about-section">
+      <img src="/images/team.jpg" alt="Team" class="about-img" />
+      <div class="about-text">
+        <h2>👩‍💻 Our Team</h2>
+        <p>
+          We are a passionate group of innovators, engineers, and problem-solvers dedicated 
+          to building solutions that truly help the farming community.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-right">© 2024 KrishiSarthi. All rights reserved.</div>
+  </footer>
+</body>
+</html>

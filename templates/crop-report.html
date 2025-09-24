@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crop Health and Soil Report - KrishiSarthi</title>
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #162512;
+      background: #fcfefa;
+      margin: 0;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    .navbar {
+      background: #fff;
+      padding: 0 2.3rem;
+      min-height: 66px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #edf2ea;
+      font-size: 1rem;
+    }
+    .navbar .logo {
+      font-size: 1.26rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      display: flex; align-items: center; color: #51bb33;
+    }
+    .navbar .logo::before { content:''; background: #51bb33; width: 20px; height: 20px; border-radius: 5px; margin-right: 10px; display:inline-block;}
+    .navbar nav {display: flex; gap: 2.2rem;}
+    .navbar a {
+      text-decoration: none;
+      color: #222;
+      padding:3px 2px;
+      transition: color 0.15s;
+      font-weight: 500;
+    }
+    .navbar a.active, .navbar a:hover { color: #7ebb44; border-bottom:2px solid #7ebb44;}
+    .navbar .profile { width:30px; height:30px; border-radius:50%; object-fit:cover; border: 1.7px solid #eaeaea; margin-left: 1.1rem;}
+    .main-title {
+      text-align: center;
+      font-weight: 900;
+      font-size: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: .01em;
+    }
+    .report-date {
+      color: #68be39;
+      text-align: center;
+      font-size: 0.99rem;
+      margin-bottom: 1.32rem;
+      font-weight: 500;
+    }
+    .section-title {
+      font-weight: 700;
+      margin: 2.2rem 0 1.2rem 0;
+      font-size: 1.12rem;
+    }
+    .result-comp-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .result-card {
+      background: #f7fdf3;
+      border-radius: 12px;
+      padding: 1rem 1.1rem 1.1rem 1rem;
+      flex: 1;
+      min-width: 250px;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+      box-shadow: 0 1px 9px 0 rgba(124,196,104,0.05);
+      margin-bottom: .7rem;
+    }
+    .result-card img {
+      width: 70px; height: 46px; object-fit: cover; border-radius: 8px; flex-shrink: 0; background: #eaeaea;
+    }
+    .result-text-col {
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .result-card-title { font-weight: bold; font-size: 1.08rem; margin-bottom: 0.05rem;}
+    .result-card-desc { color: #4d5c36; font-size: .95rem; margin-bottom: .31rem;}
+    .view-btn {
+      background: #7ebb44; color: #fff; border: none;
+      border-radius: 19px; font-size: 0.96rem; padding: 0.33rem 1.1rem; font-weight: bold; cursor: pointer;
+      margin-top: 0.13rem; transition: background 0.2s;
+    }
+    .view-btn:hover { background: #619d1d;}
+    .analysis-block {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.15rem 1.3rem;
+      box-shadow: 0 1px 9px 0 rgba(145,181,124,0.06);
+      font-size: .99rem;
+      margin-bottom: 1.6rem;
+      color: #294223;
+    }
+    /* Action Plan List */
+    .action-list {
+      list-style: none;
+      margin: 0; padding: .7rem 0 .7rem 0;
+    }
+    .action-list li {
+      background: #eafbe7;
+      border-radius: 9px;
+      padding: 0.45rem 0.8rem;
+      margin-bottom: .7rem;
+      font-size: .98rem;
+      color: #366b34;
+      border-left: 6px solid #b6ea88;
+    }
+    .action-list li span {
+      font-weight: bold;
+      color: #85b05b;
+      font-size: .99rem;
+    }
+    /* Dashboard */
+    .dashboard-row {
+      display: flex;
+      gap: 1.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .dash-card {
+      flex: 1 1 270px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.1rem 1rem 1.35rem 1rem;
+      box-shadow: 0 1px 10px 0 rgba(146,186,104,0.07);
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      position:relative;
+    }
+    .dash-index-number {
+      color: #7ebb44;
+      font-size: 2.1rem;
+      font-weight: bold;
+      margin-bottom: 1.1rem;
+      margin-top: 0;
+    }
+    .dash-index-inc {
+      font-size: .93rem;
+      color: #88d15c;
+      text-align: center;
+      margin-top: -.58rem;
+    }
+    .dash-small-label { font-size: .99rem; color: #4b6e3a; text-align: center;}
+    .dash-nutrient-labels {
+      width: 100%; display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1.2rem;
+    }
+    .dash-bar-bg {
+      width: 72px; height: 17px; background: #e8f7e1;
+      border-radius: 7px; position:relative; overflow:hidden;
+    }
+    .dash-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, #aecf7d 75%, #f3e87b 100%);
+      border-radius: 7px;
+    }
+    /* Map */
+    .map-block {
+      width: 100%; height: 320px; margin: 1.5rem auto; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 2px 13px 0 rgba(107,196,95,0.08);
+      max-width: 98vw;
+    }
+    /* Next Analysis Box */
+    .next-analysis-box {
+      width: 100%; margin: 2.3rem auto 1.7rem auto; text-align: center; max-width: 650px;
+    }
+    .next-analysis-title {
+      font-size: 1.3rem; font-weight: 900; margin-bottom: 0.62rem;
+    }
+    .next-analysis-text {
+      color: #66b153; font-size: 1.01rem; margin-bottom: 1.2rem;
+    }
+    .generate-btn {
+      background: #7ebb44; color: #fff;
+      border: none; border-radius: 18px; font-size: 1.08rem;
+      padding: 0.6rem 2.2rem; font-weight: 700; cursor: pointer;
+      transition: background 0.16s;
+    }
+    .generate-btn:hover { background: #608a2b; }
+    footer {
+      background: #f4fcef;
+      margin-top: auto;
+      text-align: center;
+      padding: 1.4rem 0 0.4rem 0;
+      font-size: .98rem;
+      color: #93b876;
+      border-top: 1px solid #eafbe7;
+    }
+    .footer-links { margin-bottom: 4px;}
+    .footer-links a { color: #65b145; margin: 0 13px; text-decoration: none; font-weight: 600;}
+    .footer-links a:hover { text-decoration: underline;}
+    .footer-social {margin: 8px 0;}
+    .footer-social a {margin: 0 7px; color: #7ebb44; font-size: 1.15rem; text-decoration: none;}
+    @media (max-width: 900px){
+      .result-comp-row,.dashboard-row { flex-direction: column; gap: 1rem;}
+      .main-title{font-size: 1.3rem;}
+    }
+    @media (max-width: 700px){
+      .navbar{padding: 0 0.75rem;}
+      .map-block{height:160px;}
+    }
+  </style>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <span class="logo">KrishiSarthi</span>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/about">About</a>
+      <a href="/">Help</a>
+      <a href="/chatbot">Chatbot Support</a>
+      <a href="/helpline">Helpline</a>
+      <a href="#" class="active">Govt. Resources</a>
+    </nav>
+    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Profile" class="profile" />
+  </div>
+
+  <!-- Main Title -->
+  <div class="main-title">Crop Health and Soil Report</div>
+  <div class="report-date">Generated on July 26, 2024</div>
+
+  <!-- Results Compilation -->
+  <div class="section-title">Results Compilation</div>
+  <div class="result-comp-row">
+    <div class="result-card">
+      <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Plant health"/>
+      <div class="result-text-col">
+        <div class="result-card-title">Plant Health</div>
+        <div class="result-card-desc">Overall health of the crops is good, with minor signs of nutrient deficiency in some areas. Further analysis is recommended.</div>
+        <button class="view-btn">View Details</button>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="https://images.unsplash.com/photo-1518972559570-5c14d6751383?auto=format&fit=crop&w=400&q=80" alt="Soil Condition"/>
+      <div class="result-text-col">
+        <div class="result-card-title">Soil Condition</div>
+        <div class="result-card-desc">
+          Soil analysis indicates optimal pH levels and good moisture content. However, organic matter content is slightly below the recommended level.
+        </div>
+        <button class="view-btn">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Combined Analysis -->
+  <div class="section-title">Combined Analysis</div>
+  <div class="analysis-block">
+    The combined analysis of plant health and soil condition suggests that while the crops are generally healthy, improving soil organic matter could enhance their growth and yield. Addressing the minor nutrient deficiencies observed in some areas is also recommended.
+  </div>
+
+  <!-- Action Plan -->
+  <div class="section-title">Action Plan</div>
+  <ul class="action-list">
+    <li><span>Immediate Actions</span><br>
+      Conduct a detailed nutrient analysis of the affected areas to identify specific deficiencies.
+    </li>
+    <li><span>Soil Treatment</span><br>
+      Apply organic amendments such as compost or manure to increase soil organic matter content.
+    </li>
+    <li><span>Follow-up Monitoring</span><br>
+      Monitor crop health and soil condition regularly, especially after implementing the recommended actions.
+    </li>
+  </ul>
+
+  <!-- Visual Dashboard -->
+  <div class="section-title">Visual Dashboard</div>
+  <div class="dashboard-row">
+    <div class="dash-card">
+      <div class="dash-index-number">85%</div>
+      <div class="dash-small-label">Crop Health Index</div>
+      <div class="dash-index-inc">Last 3 Months <span style="color:#52b743;">+5%</span></div>
+      <svg width="97" height="44" viewBox="0 0 97 44" fill="none">
+        <polyline points="2,42 12,15 23,27 32,8 44,30 53,23 62,36 75,9 85,36 95,15"
+         stroke="#8fd56f" stroke-width="2.5" fill="none" />
+        <polyline points="2,42 95,15" stroke="#f8f8f7" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="dash-card">
+      <div style="font-weight:bold; font-size:1.28rem; text-align:left; color:#446c27;">Soil Nutrient Levels</div>
+      <div style="margin-top:.7rem; font-size:2rem; font-weight:900; color:#99c966;" id="soil-nut-label">Optimal</div>
+      <div class="dash-small-label" style="color:#8ad259;">Current</div>
+      <div class="dash-nutrient-labels">
+        <div class="dash-bar-bg"><div class="dash-bar-inner" style="width:40%;"></div></div>
+        <div class="dash-bar-bg"><div class="dash-bar-inner" style="width:60%;"></div></div>
+        <div class="dash-bar-bg"><div class="dash-bar-inner" style="width:85%;"></div></div>
+      </div>
+      <div class="dash-nutrient-labels" style="font-size:.99rem; font-weight:600; color:#9ad467; margin-top:3px;">
+        <span>NITROGEN</span><span>PHOSPHORUS</span><span>POTASSIUM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-block" id="map"></div>
+
+  <!-- Next Analysis -->
+  <div class="next-analysis-box">
+    <div class="next-analysis-title">Ready for another analysis?</div>
+    <div class="next-analysis-text">
+      Keep your crops healthy and your soil in top condition with regular reports.
+    </div>
+    <button class="generate-btn">Generate New Report</button>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" aria-label="Twitter">&#x1F426;</a>
+      <a href="#" aria-label="Facebook">&#x1F5E8;</a>
+      <a href="#" aria-label="Instagram">&#x1F33F;</a>
+    </div>
+    <div style="font-size:.92rem;">© 2024 KrishiSarthi. All rights reserved.</div>
+  </footer>
+
+  <!-- JS for Leaflet Map -->
+  <script>
+    // Initialize a static view map (demo)
+    var map = L.map('map', {scrollWheelZoom: false, dragging: false, zoomControl: false}).setView([38.930, -106.100], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: ''
+    }).addTo(map);
+  </script>
+</body>
+</html>
